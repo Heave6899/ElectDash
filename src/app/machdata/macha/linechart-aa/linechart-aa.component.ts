@@ -10,48 +10,51 @@ import { Subscription, Subject } from 'rxjs';
   styleUrls: ['./linechart-aa.component.css'],
 })
 export class LinechartAAComponent implements OnDestroy {
-  messages =
-    {
-      topic: '',
-      timestamp: '',
-      current: '',
-      voltage: '',
-      pf: '',
-      freq: '',
-      power: '',
-    };
+  // messages =
+  //   {
+  //     topic: '',
+  //     timestamp: '',
+  //     current: '',
+  //     voltage: '',
+  //     pf: '',
+  //     freq: '',
+  //     power: '',
+  //   };
     
     subscription: Subscription;
 
     constructor(private messageService:SseService) {
         // subscribe to home component messages
-        this.subscription = this.messageService.getMessage().subscribe(message => {
-          if(message){
-          this.messages = {
-            topic: message.topic,
-            timestamp: message.timestamp,
-            current: message.current,
-            voltage: message.voltage,
-            pf: message.pf,
-            freq: message.pf,
-            power: message.power,
-          }
-          console.log(this.messages);
-        } else {
-          this.messages = {
-            topic: '',
-            timestamp: '',
-            current: '',
-            voltage: '',
-            pf: '',
-            freq: '',
-            power: '',
-          }
+        this.subscription = this.messageService.getMessageA().subscribe(message => {
+           if(message){
+             this.lineChartData = message.dataA;
+             this.lineChartLabels = message.label;
+           }
+        //   this.messages = {
+        //     topic: message.topic,
+        //     timestamp: message.timestamp,
+        //     current: message.current,
+        //     voltage: message.voltage,
+        //     pf: message.pf,
+        //     freq: message.pf,
+        //     power: message.power,
+        //   }
+        //   console.log(this.messages);
+        // } else {
+        //   this.messages = {
+        //     topic: '',
+        //     timestamp: '',
+        //     current: '',
+        //     voltage: '',
+        //     pf: '',
+        //     freq: '',
+        //     power: '',
+        //   }
           // clear messages when empty message received
         }
-        if(this.messages.topic == 'pibpump/a')
-        this.pushEventToChartData(this.messages);
-        });
+        //if(this.messages.topic == 'pibpump/a')
+        //this.pushEventToChartData(this.messages);
+        );
         
     }
 

@@ -17,7 +17,17 @@
   <div class="card card-chart">
     <div class="card-header card-header-warning">
       <div class="ct-chart">
-        <app-linechart-aa></app-linechart-aa>
+        <div class="chart-wrapper">
+          <canvas baseChart 
+              [datasets]="lineChartDataA" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+      </div>
       </div>
     </div>
     <div class="card-body">
@@ -31,7 +41,17 @@
     <div class="card card-chart">
       <div class="card-header card-header-warning">
         <div class="ct-chart">
-            <app-linechart-va></app-linechart-va>
+          <div class="chart-wrapper">
+            <canvas baseChart 
+                [datasets]="lineChartDataV" 
+                [labels]="lineChartLabels" 
+                [options]="lineChartOptions"
+                [colors]="lineChartColors" 
+                [legend]="lineChartLegend" 
+                [chartType]="lineChartType" 
+                [plugins]="lineChartPlugins">
+            </canvas>
+        </div>
         </div>
       </div>
       <div class="card-body">

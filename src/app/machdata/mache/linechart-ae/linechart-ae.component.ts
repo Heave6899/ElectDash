@@ -25,7 +25,7 @@ export class LinechartAEComponent implements OnDestroy {
 
     constructor(private messageService:SseService) {
         // subscribe to home component messages
-        this.subscription = this.messageService.getMessage().subscribe(message => {
+        this.subscription = this.messageService.getMessageE().subscribe(message => {
           if(message){
           this.messages = {
             topic: message.topic,
@@ -49,7 +49,7 @@ export class LinechartAEComponent implements OnDestroy {
           }
           // clear messages when empty message received
         }
-        if(this.messages.topic == 'pibpump/e')
+        //if(this.messages.topic == 'pibpump/e')
         this.pushEventToChartData(this.messages);
         });
         
