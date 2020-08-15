@@ -1,6 +1,5 @@
 <div class="chart-wrapper">
     <canvas baseChart 
-        
         [datasets]="lineChartData" 
         [labels]="lineChartLabels" 
         [options]="lineChartOptions"
@@ -9,4 +8,10 @@
         [chartType]="lineChartType" 
         [plugins]="lineChartPlugins">
     </canvas>
+    <select class="form-control" id="lineChartSelector" 
+        [(ngModel)]="lineChartType">
+      <option value="line">Line Graph</option>
+      <option value="bar">Bar Graph</option>
+      <option value="pie">Pie Graph</option>
+    </select>
 </div>

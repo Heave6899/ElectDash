@@ -70,6 +70,7 @@ export class SseService {
   onConnectionLost(responseObject) {
     if (responseObject.errorCode !== 0) {
       console.log('onConnectionLost:' + responseObject.errorMessage);
+      this.onConnect();
     }
   }
   public onMessage(message: string) { }

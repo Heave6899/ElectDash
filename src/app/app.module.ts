@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormsModule } from '@angular/forms';
 
 
 import { ChartsModule } from 'ng2-charts';
@@ -61,6 +62,7 @@ import { LinechartAFComponent } from './machdata/machf/linechart-af/linechart-af
     LinechartAFComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     ChartsModule,

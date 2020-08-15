@@ -138,7 +138,7 @@ export class LinechartVFComponent implements OnDestroy, OnInit {
 
   lineChartLegend = true;
   lineChartPlugins = [];
-  lineChartType = 'line';
+  public lineChartType = 'bar';
 
 
   // constructor(private service: SseService){
