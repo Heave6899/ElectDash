@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "InventorySys": {
+    "ElectDash": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/InventorySys",
+            "outputPath": "dist/ElectDash",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "InventorySys:build"
+            "browserTarget": "ElectDash:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "InventorySys:build:production"
+              "browserTarget": "ElectDash:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "InventorySys:build"
+            "browserTarget": "ElectDash:build"
           }
         },
         "test": {
@@ -120,15 +120,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "InventorySys:serve"
+            "devServerTarget": "ElectDash:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "InventorySys:serve:production"
+              "devServerTarget": "ElectDash:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "InventorySys"
+  "defaultProject": "ElectDash"
 }
