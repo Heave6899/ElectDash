@@ -1,0 +1,80 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-info">
+                <h4 class="card-title">Multi-factor Authentication</h4>
+            </div>
+            <div class="card-body">
+                <div class="row" *ngIf="!enabled">
+                    <div class="col-3">
+                        <qrcode allowEmptyString="true" [qrdata]="url" [width]="256" [errorCorrectionLevel]="'M'"
+                            [elementType]="'svg'">
+                        </qrcode>
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            <p>To use an authenticator app go through the following steps:</p>
+                            <ol class="list">
+                                <li>
+                                    <p>
+                                        Download a two-factor authenticator app like Microsoft Authenticator for
+                                        <a href="https://go.microsoft.com/fwlink/?Linkid=825071">Windows Phone</a>,
+                                        <a href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a> and
+                                        <a href="https://go.microsoft.com/fwlink/?Linkid=825073">iOS</a> or
+                                        Google Authenticator for
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en">Android</a>
+                                        and
+                                        <a
+                                            href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">iOS</a>.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>Scan the QR Code or enter this key <kbd>{{ secretkey }}</kbd> into your two
+                                        factor
+                                        authenticator app. Spaces and casing do not matter.</p>
+                                    <div class="alert alert-info">To enable QR code generation please read our <a
+                                            href="https://go.microsoft.com/fwlink/?Linkid=852423">documentation</a>.
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>
+                                        Once you have scanned the QR code or input the key above, your two factor
+                                        authentication app will provide you
+                                        with a unique code. Enter the code in the confirmation box below.
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form [formGroup]="verifyForm">
+                                                <div class="form-group">
+                                                    <label for="mfaCode" class="control-label">Verification
+                                                        Code</label>
+                                                    <input formControlName="mfaCode" class="form-control"
+                                                        autocomplete="off" />
+                                                </div>
+                                                <button (click)="onVerify()" class="btn btn-primary">Verify</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="enabled">
+                    <div class="col-md-6">
+                        <h5>Deactivate MFA</h5>
+                        <form [formGroup]="verifyForm">
+                            <div class="form-group">
+                                <label for="verifycode" class="control-label">Verification
+                                    Code</label>
+                                <input formControlName="mfaCode" class="form-control" autocomplete="off" />
+                            </div>
+                            <button (click)="onVerify()" class="btn btn-primary">Verify</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
