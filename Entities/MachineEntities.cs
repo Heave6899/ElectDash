@@ -4,7 +4,7 @@ using AutoMapper;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace WebApi.Entities.User
+namespace WebApi.Entities.Machine
 {
     public class MachineData
     {
@@ -32,7 +32,6 @@ namespace WebApi.Entities.User
         public decimal Current { get; set; }
         public decimal Voltage { get; set; }
         public decimal Power { get; set; }
-        public DateTime CreatedOn { get; set; }
         public string MachineName { get; set; }
     }
 

@@ -40,3 +40,6 @@ typings
 # .NET compiled files
 bin
 obj
+
+appsettings.Development.json
+appsettings.json

@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Mqtt.Client.AspNetCore.Extensions;
+using Mqtt.Client.AspNetCore.Services;
+using Mqtt.Client.AspNetCore.Settings;
 
 namespace WebApi
 {
@@ -20,6 +23,27 @@ namespace WebApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            MapConfiguration();
+        }
+
+        private void MapConfiguration()
+        {
+            MapBrokerHostSettings();
+            MapClientSettings();
+        }
+
+        private void MapBrokerHostSettings()
+        {
+            BrokerHostSettings brokerHostSettings = new BrokerHostSettings();
+            Configuration.GetSection(nameof(BrokerHostSettings)).Bind(brokerHostSettings);
+            AppSettingsProvider.BrokerHostSettings = brokerHostSettings;
+        }
+
+        private void MapClientSettings()
+        {
+            ClientSettings clientSettings = new ClientSettings();
+            Configuration.GetSection(nameof(ClientSettings)).Bind(clientSettings);
+            AppSettingsProvider.ClientSettings = clientSettings;
         }
 
         // add services to the DI container
@@ -58,6 +82,11 @@ namespace WebApi
             // configure DI for application services
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IMFAService, MFAService>();
+            services.AddSingleton<IMachineService, MachineService>();
+
+            services.AddMqttClientHostedService();
+            services.AddSingleton<ExternalService>();
+
             services.AddMvc();
         }
 
