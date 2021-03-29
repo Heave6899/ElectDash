@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApi.Helpers;
 using WebApi.Services;
+using Microsoft.Extensions.Options;
+using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi
 {
@@ -21,27 +27,54 @@ namespace WebApi
         {
             services.AddCors();
             services.AddControllers();
-
+            services.AddAutoMapper(typeof(Startup));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(options =>
+               {
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidateAudience = true,
+                       ValidateLifetime = true,
+                       ValidateIssuerSigningKey = true,
+                       ValidIssuer = Configuration["AppSettings:Issuer"],
+                       ValidAudience = Configuration["AppSettings:Issuer"],
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["AppSettings:Secret"]))
+                   };
+               });
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
+                    .RequireAuthenticatedUser().Build());
+            });
             // configure strongly typed settings object
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
+            services.Configure<DbContext>(Configuration.GetSection(nameof(DbContext)));
+            services.AddSingleton<IDbContext>(provider =>
+                provider.GetRequiredService<IOptions<DbContext>>().Value);
+
             // configure DI for application services
-            services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IMFAService, MFAService>();
+            services.AddMvc();
         }
 
         // configure the HTTP request pipeline
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseRouting();
 
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             // global cors policy
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-            // custom jwt auth middleware
-            app.UseMiddleware<JwtMiddleware>();
+
 
             app.UseEndpoints(x => x.MapControllers());
         }
