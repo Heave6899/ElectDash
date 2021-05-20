@@ -8,12 +8,12 @@ import { Observable } from "rxjs";
 export class MachineService {
   constructor(private http: HttpClient) {}
 
-  getTableData(machinename: string): Observable<[]> {
+  getGraphData(machinename: string): Observable<[]> {
     return this.http.get<[]>(
-      "http://localhost:4000/machine/graph" + machinename
+      "http://localhost:4000/machine/graph/" + machinename
     );
   }
-  getGraphData(machinename: string): Observable<[]> {
+  getTableData(machinename: string): Observable<[]> {
     return this.http.get<[]>("http://localhost:4000/machine/" + machinename);
   }
 }

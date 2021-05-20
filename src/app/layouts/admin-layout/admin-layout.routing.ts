@@ -61,6 +61,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapsComponent },
   { path: "notifications", component: NotificationsComponent },
-  { path: "export", component: ExportComponent },
+  { path: "export/:machinename", component: ExportComponent },
   { path: "settings", component: SettingsComponent },
 ];

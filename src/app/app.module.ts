@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -32,6 +32,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ExportComponent } from './export/export.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { SettingsComponent } from './settings/settings.component';
+import { LoaderInterceptor } from './_helpers/loader.interceptor';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   imports: [
@@ -50,10 +52,12 @@ import { SettingsComponent } from './settings/settings.component';
     MatSelectModule,
     QRCodeModule,
     MatTooltipModule,
+    NgxSpinnerModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
@@ -64,7 +68,8 @@ import { SettingsComponent } from './settings/settings.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

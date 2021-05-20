@@ -6,6 +6,9 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
+import { LoaderService } from 'app/_services/loader.service';
+import { Subject } from 'rxjs';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
     selector: 'app-admin-layout',
@@ -16,12 +19,14 @@ export class AdminLayoutComponent implements OnInit {
     private _router: Subscription;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
+    isLoading: Subject<boolean> = this.loader.isLoading;
 
-    constructor(public location: Location, private router: Router) { }
+    constructor(public location: Location, private router: Router, private loader: LoaderService, private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
         const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
-
+        //loader
+        this.isLoading.subscribe(x => x == true ? this.spinner.show() : this.spinner.hide())
         if (isWindows && !document.getElementsByTagName('body')[0].classList.contains('sidebar-mini')) {
             // if we are on windows OS we activate the perfectScrollbar function
 
@@ -119,7 +124,7 @@ export class AdminLayoutComponent implements OnInit {
 
         if (color == null) {
             var colorDB = localStorage.getItem('color');
-            if (colorDB == 'null') {
+            if (!colorDB) {
                 colorDB = 'danger';
             }
             if ($sidebar.length !== 0) {
