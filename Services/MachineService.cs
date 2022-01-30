@@ -16,7 +16,7 @@ namespace WebApi.Services
     {
         Task<MachineData> MachineReceiveData(string data);
         Task<MachineGraphDTO> GetMachineData(string MachineName);
-        Task<List<MachineDataTableDTO>> GetMachineDataTable(string MachineName);
+        Task<List<MachineDataTableDTO>> GetMachineDataTable(string MachineName, int Skip, int Limit);
     }
     public class MachineService : IMachineService
     {
@@ -49,28 +49,31 @@ namespace WebApi.Services
             data.Count = data.PhaseOne.Count;
             return data;
         }
-        public async Task<List<MachineDataTableDTO>> GetMachineDataTable(string MachineName)
+        public async Task<List<MachineDataTableDTO>> GetMachineDataTable(string MachineName, int Skip, int Limit)
         {
             var data = new List<MachineDataTableDTO>();
-            var PhaseOne = _mapper.Map<List<MachineDataDTO>>(await _machines.Find<MachineData>(x => x.MachineName == MachineName && x.PhaseNo == 1).SortByDescending(x => x.CreatedOn).Limit(50).ToListAsync());
-            var PhaseTwo = _mapper.Map<List<MachineDataDTO>>(await _machines.Find<MachineData>(x => x.MachineName == MachineName && x.PhaseNo == 2).SortByDescending(x => x.CreatedOn).Limit(50).ToListAsync());
-            var PhaseThree = _mapper.Map<List<MachineDataDTO>>(await _machines.Find<MachineData>(x => x.MachineName == MachineName && x.PhaseNo == 3).SortByDescending(x => x.CreatedOn).Limit(50).ToListAsync());
-
-            for (var i = 0; i < 50; i++)
+            Skip = Limit * Skip;
+            var PhaseOne = _mapper.Map<List<MachineDataDTO>>(await _machines.Find<MachineData>(x => x.MachineName == MachineName && x.PhaseNo == 1).SortByDescending(x => x.CreatedOn).Skip(Skip).Limit(Limit).ToListAsync());
+            var PhaseTwo = _mapper.Map<List<MachineDataDTO>>(await _machines.Find<MachineData>(x => x.MachineName == MachineName && x.PhaseNo == 2).SortByDescending(x => x.CreatedOn).Skip(Skip).Limit(Limit).ToListAsync());
+            var PhaseThree = _mapper.Map<List<MachineDataDTO>>(await _machines.Find<MachineData>(x => x.MachineName == MachineName && x.PhaseNo == 3).SortByDescending(x => x.CreatedOn).Skip(Skip).Limit(Limit).ToListAsync());
+            if (PhaseOne.Count != 0 && PhaseTwo.Count != 0 && PhaseThree.Count != 0)
             {
-                data.Add(new MachineDataTableDTO()
+                for (var i = 0; i < PhaseOne.Count; i++)
                 {
-                    CreatedOn = PhaseOne[i].CreatedOn,
-                    Voltage1 = PhaseOne[i].Voltage,
-                    Voltage2 = PhaseTwo[i].Voltage,
-                    Voltage3 = PhaseThree[i].Voltage,
-                    Current1 = PhaseOne[i].Current,
-                    Current2 = PhaseTwo[i].Current,
-                    Current3 = PhaseThree[i].Current,
-                    Power1 = PhaseOne[i].Power,
-                    Power2 = PhaseTwo[i].Power,
-                    Power3 = PhaseThree[i].Power
-                });
+                    data.Add(new MachineDataTableDTO()
+                    {
+                        CreatedOn = PhaseOne[i].CreatedOn,
+                        Voltage1 = PhaseOne[i].Voltage,
+                        Voltage2 = PhaseTwo[i].Voltage,
+                        Voltage3 = PhaseThree[i].Voltage,
+                        Current1 = PhaseOne[i].Current,
+                        Current2 = PhaseTwo[i].Current,
+                        Current3 = PhaseThree[i].Current,
+                        Power1 = PhaseOne[i].Power,
+                        Power2 = PhaseTwo[i].Power,
+                        Power3 = PhaseThree[i].Power
+                    });
+                }
             }
 
 

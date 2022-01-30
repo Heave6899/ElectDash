@@ -96,12 +96,12 @@ namespace WebApi
 
             app.UseRouting();
             app.UseAuthentication();
+            app.UseCors(x => x.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
             app.UseAuthorization();
             // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+
 
 
 

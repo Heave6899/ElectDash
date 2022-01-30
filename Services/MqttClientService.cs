@@ -53,11 +53,20 @@ namespace Mqtt.Client.AspNetCore.Services
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await mqttClient.ConnectAsync(options);
-            if (!mqttClient.IsConnected)
+            try
+            {
+                await mqttClient.ConnectAsync(options);
+                if (!mqttClient.IsConnected)
+                {
+                    await mqttClient.ReconnectAsync();
+                }
+            }
+            catch (Exception ex)
             {
                 await mqttClient.ReconnectAsync();
             }
+
+
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)

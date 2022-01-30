@@ -15,6 +15,8 @@ namespace WebApi.Entities.Machine
         public decimal Current { get; set; }
         public decimal Voltage { get; set; }
         public decimal Power { get; set; }
+        public int Frequency { get; set; }
+        public decimal PF { get; set; }
         public DateTime CreatedOn { get; set; }
         public string MachineName { get; set; }
         public int PhaseNo { get; set; }
@@ -25,6 +27,8 @@ namespace WebApi.Entities.Machine
         public decimal Current { get; set; }
         public decimal Voltage { get; set; }
         public decimal Power { get; set; }
+        public int Frequency { get; set; }
+        public decimal PF { get; set; }
         public DateTime CreatedOn { get; set; }
         public string MachineName { get; set; }
         public int PhaseNo { get; set; }

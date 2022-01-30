@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using WebApi.Entities;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Text;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace WebApi.Controllers
 {
@@ -26,12 +30,23 @@ namespace WebApi.Controllers
             return Ok(data);
         }
 
-        [HttpGet("{machinename}")]
+        [HttpGet("{q}")]
         [Authorize]
-        public async Task<IActionResult> GetMachineDataTable(string machinename)
+        public async Task<IActionResult> GetMachineDataTable(string q)
         {
-            var data = await _machineService.GetMachineDataTable(machinename);
+            var bytes = Convert.FromBase64String(q);
+            var decodedString = Encoding.UTF8.GetString(bytes);
+            var obj = JsonConvert.DeserializeObject<Dictionary<string, string>>(decodedString);
+            var data = await _machineService.GetMachineDataTable(obj["machinename"], int.Parse(obj["skip"]), int.Parse(obj["limit"]));
             return Ok(data);
         }
+
+        // [HttpGet("a/{machinename}")]
+        // [Authorize]
+        // public async Task<IActionResult> GetMachineDataTotalKwh(string machinename)
+        // {
+        //     var data = await _machineService.GetMachineDataTable(machinename);
+        //     return Ok(data);
+        // }
     }
 }
