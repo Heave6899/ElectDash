@@ -25,7 +25,6 @@ export class SettingsComponent implements OnInit {
   isEnabled() {
     this.mfaService.isMFAEnabled().subscribe(
       content => {
-        console.log(content['result'])
         if (content['result'] == false) {
           this.mfaService.getSecret().subscribe(
             content => {
@@ -64,7 +63,6 @@ export class SettingsComponent implements OnInit {
           )
       }
       else {
-        console.log(this.secretkey)
         this.verifyForm.patchValue({ mfaSecret: this.secretkey, actDeact: false });
         this.mfaService.actdeactmfa(this.verifyForm.value).subscribe
           (

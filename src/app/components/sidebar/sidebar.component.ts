@@ -18,49 +18,42 @@ export const ROUTES: RouteInfo[] = [
     class: "",
     param: "",
   },
-  {
-    path: "/user-profile",
-    title: "User Profile",
-    icon: "person",
-    class: "",
-    param: "",
-  },
-  {
-    path: "/table-list",
-    title: "Table List",
-    icon: "content_paste",
-    class: "",
-    param: "",
-  },
-  {
-    path: "/typography",
-    title: "Typography",
-    icon: "library_books",
-    class: "",
-    param: "",
-  },
-  {
-    path: "/icons",
-    title: "Icons",
-    icon: "bubble_chart",
-    class: "",
-    param: "",
-  },
-  { path: "/maps", title: "Maps", icon: "location_on", class: "", param: "" },
-  {
-    path: "/notifications",
-    title: "Notifications",
-    icon: "notifications",
-    class: "",
-    param: "",
-  },
-  {
-    path: "/export",
-    title: "Export Data",
-    icon: "import_export",
-    class: "",
-    param: "a",
-  },
+  // {
+  //   path: "/user-profile",
+  //   title: "User Profile",
+  //   icon: "person",
+  //   class: "",
+  //   param: "",
+  // },
+  // {
+  //   path: "/table-list",
+  //   title: "Table List",
+  //   icon: "content_paste",
+  //   class: "",
+  //   param: "",
+  // },
+  // {
+  //   path: "/typography",
+  //   title: "Typography",
+  //   icon: "library_books",
+  //   class: "",
+  //   param: "",
+  // },
+  // {
+  //   path: "/icons",
+  //   title: "Icons",
+  //   icon: "bubble_chart",
+  //   class: "",
+  //   param: "",
+  // },
+  // { path: "/maps", title: "Maps", icon: "location_on", class: "", param: "" },
+  // {
+  //   path: "/notifications",
+  //   title: "Notifications",
+  //   icon: "notifications",
+  //   class: "",
+  //   param: "",
+  // },
 ];
 
 @Component({
@@ -74,7 +67,7 @@ export class SidebarComponent implements OnInit {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter((menuItem) => menuItem);

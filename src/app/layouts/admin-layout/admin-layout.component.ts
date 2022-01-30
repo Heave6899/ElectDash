@@ -19,14 +19,12 @@ export class AdminLayoutComponent implements OnInit {
     private _router: Subscription;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
-    isLoading: Subject<boolean> = this.loader.isLoading;
 
-    constructor(public location: Location, private router: Router, private loader: LoaderService, private spinner: NgxSpinnerService) { }
+
+    constructor(public location: Location, private router: Router) { }
 
     ngOnInit() {
         const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
-        //loader
-        this.isLoading.subscribe(x => x == true ? this.spinner.show() : this.spinner.hide())
         if (isWindows && !document.getElementsByTagName('body')[0].classList.contains('sidebar-mini')) {
             // if we are on windows OS we activate the perfectScrollbar function
 
