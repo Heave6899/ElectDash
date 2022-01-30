@@ -112,6 +112,7 @@ export class DashboardComponent implements OnInit {
   incI: any;
   graphData: any = [];
   innerWidth: any;
+  machineList: any;
   datapointskipsize: any = 2;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -129,6 +130,7 @@ export class DashboardComponent implements OnInit {
     this.graphI()
   }
   ngOnInit() {
+    this.machineList = [{ id: 'machineA', name: 'Machine A', increment: this.incA }, { id: 'machineB', name: 'Machine B', increment: this.incB }, { id: 'machineC', name: 'Machine C', increment: this.incC }, { id: 'machineD', name: 'Machine D', increment: this.incD }, { id: 'machineE', name: 'Machine E', increment: this.incE }, { id: 'machineF', name: 'Machine F', increment: this.incF }, { id: 'machineG', name: 'Machine G', increment: this.incG }, { id: 'machineH', name: 'Machine H', increment: this.incH }, { id: 'machineI', name: 'Machine I', increment: this.incI }]
     this.graphData = this.graphDataPoints()
     this.lastUpdatedAt = Date.now()
     localStorage.setItem('lastUpdatedAt', this.lastUpdatedAt.toString());

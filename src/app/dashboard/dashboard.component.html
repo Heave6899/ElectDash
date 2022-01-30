@@ -1,199 +1,86 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-4 col-lg-4 col-sm-12">
-        <div class="card card-chart">
-          <div class="card-header card-header-success">
-            <div class="ct-chart ct-square" id="machineA"></div>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Machine A</h4>
-            <p class="card-category">
-              <span class="{{(incA> 0)? 'text-success':'text-danger'}}"><i
-                  class="{{(incA> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i> {{incA |
-                number : '1.2-2'}}% </span>
-              {{(incA > 0)? 'increase':
-              'decrease'}} in last minute.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons">access_time</i> updated {{this.lastUpdatedAt | dateAgo: refreshCount }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-12">
-        <div class="card card-chart">
-          <div class="card-header card-header-info">
-            <div class="ct-chart ct-square" id="machineB"></div>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Machine B</h4>
-            <p class="card-category">
-              <span class="{{(incB> 0)? 'text-success':'text-danger'}}"><i
-                  class="{{(incB> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i> {{incB |
-                number : '1.2-2'}}% </span>
-              {{(incB > 0)? 'increase':
-              'decrease'}} in last minute.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons">access_time</i> updated {{this.lastUpdatedAt | dateAgo: refreshCount }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-12">
+      <div class="col-md-4 col-lg-4 col-sm-12" *ngFor="let machine of machineList; let i = index">
         <div class="card card-chart">
           <div class="card-header card-header-primary">
-            <div class="ct-chart ct-square" id="machineC"></div>
+            <div class="ct-chart ct-square" id={{machine.id}}></div>
           </div>
           <div class="card-body">
-            <h4 class="card-title">Machine C</h4>
+            <h4 class="card-title">{{machine.name}}</h4>
             <p class="card-category">
-              <span class="{{(incC> 0)? 'text-success':'text-danger'}}"><i
-                  class="{{(incC> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i> {{incC |
-                number : '1.2-2'}}% </span>
-              {{(incC > 0)? 'increase':
-              'decrease'}} in last minute.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons">access_time</i> updated {{this.lastUpdatedAt | dateAgo: refreshCount }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 col-lg-4 col-sm-12">
-        <div class="card card-chart">
-          <div class="card-header card-header-success">
-            <div class="ct-chart ct-square" id="machineD"></div>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Machine D</h4>
-            <p class="card-category">
-              <span class="{{(incD> 0)? 'text-success':'text-danger'}}"><i
-                  class="{{(incD> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i> {{incD |
-                number : '1.2-2'}}% </span>
-              {{(incD > 0)? 'increase':
-              'decrease'}} in last minute.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons">access_time</i> updated {{this.lastUpdatedAt | dateAgo: refreshCount }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-12">
-        <div class="card card-chart">
-          <div class="card-header card-header-info">
-            <div class="ct-chart ct-square" id="machineE"></div>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Machine E</h4>
-            <p class="card-category">
-              <span class="{{(incE> 0)? 'text-success':'text-danger'}}"><i
-                  class="{{(incE> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i> {{incE |
-                number : '1.2-2'}}% </span>
-              {{(incE > 0)? 'increase':
-              'decrease'}} in last minute.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons">access_time</i> updated {{this.lastUpdatedAt | dateAgo: refreshCount }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-12">
-        <div class="card card-chart">
-          <div class="card-header card-header-primary">
-            <div class="ct-chart ct-square" id="machineF"></div>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Machine F</h4>
-            <p class="card-category">
-              <span class="{{(incF> 0)? 'text-success':'text-danger'}}"><i
-                  class="{{(incF> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i> {{incF |
-                number : '1.2-2'}}% </span>
-              {{(incF > 0)? 'increase':
-              'decrease'}} in last minute.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons">access_time</i> updated {{this.lastUpdatedAt | dateAgo: refreshCount }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 col-lg-4 col-sm-12">
-        <div class="card card-chart">
-          <div class="card-header card-header-success">
-            <div class="ct-chart ct-square" id="machineG"></div>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Machine G</h4>
-            <p class="card-category">
-              <span class="{{(incG> 0)? 'text-success':'text-danger'}}"><i
-                  class="{{(incG> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i> {{incG |
-                number : '1.2-2'}}% </span>
-              {{(incG > 0)? 'increase':
-              'decrease'}} in last minute.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons">access_time</i> updated {{this.lastUpdatedAt | dateAgo: refreshCount }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-12">
-        <div class="card card-chart">
-          <div class="card-header card-header-info">
-            <div class="ct-chart ct-square" id="machineH"></div>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Machine H</h4>
-            <p class="card-category">
-              <span class="{{(incH> 0)? 'text-success':'text-danger'}}"><i
-                  class="{{(incH> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i> {{incH |
-                number : '1.2-2'}}% </span>
-              {{(incH > 0)? 'increase':
-              'decrease'}} in last minute.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons">access_time</i> updated {{this.lastUpdatedAt | dateAgo: refreshCount }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-12">
-        <div class="card card-chart">
-          <div class="card-header card-header-primary">
-            <div class="ct-chart ct-square" id="machineI"></div>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Machine I</h4>
-            <p class="card-category">
-              <span class="{{(incI> 0)? 'text-success':'text-danger'}}"><i
-                  class="{{(incI> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i> {{incI |
-                number : '1.2-2'}}% </span>
-              {{(incI > 0)? 'increase':
-              'decrease'}} in last minute.
+              <ng-container *ngIf="machine.name == 'Machine A'; else macB">
+                <span class="{{(incA> 0)? 'text-success':'text-danger'}}"><i
+                    class="{{(incA> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i>
+                  {{incA |
+                  number : '1.2-2'}}% </span>
+                {{(incA > 0)? 'increase':
+                'decrease'}} in last minute.
+              </ng-container>
+              <ng-container #macB *ngIf="machine.name == 'Machine B'; else macC">
+                <span class="{{(incB> 0)? 'text-success':'text-danger'}}"><i
+                    class="{{(incB> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i>
+                  {{incB |
+                  number : '1.2-2'}}% </span>
+                {{(incB > 0)? 'increase':
+                'decrease'}} in last minute.
+              </ng-container>
+              <ng-container #macC *ngIf="machine.name == 'Machine C'; else macD">
+                <span class="{{(incC> 0)? 'text-success':'text-danger'}}"><i
+                    class="{{(incC> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i>
+                  {{incC |
+                  number : '1.2-2'}}% </span>
+                {{(incC > 0)? 'increase':
+                'decrease'}} in last minute.
+              </ng-container>
+              <ng-container #macD *ngIf="machine.name == 'Machine D'; else macE">
+                <span class="{{(incD> 0)? 'text-success':'text-danger'}}"><i
+                    class="{{(incD> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i>
+                  {{incD |
+                  number : '1.2-2'}}% </span>
+                {{(incD > 0)? 'increase':
+                'decrease'}} in last minute.
+              </ng-container>
+              <ng-container #macE *ngIf="machine.name == 'Machine E'; else macF">
+                <span class="{{(incE> 0)? 'text-success':'text-danger'}}"><i
+                    class="{{(incE> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i>
+                  {{incE |
+                  number : '1.2-2'}}% </span>
+                {{(incE > 0)? 'increase':
+                'decrease'}} in last minute.
+              </ng-container>
+              <ng-container #macF *ngIf="machine.name == 'Machine F'; else macG">
+                <span class="{{(incF> 0)? 'text-success':'text-danger'}}"><i
+                    class="{{(incF> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i>
+                  {{incF |
+                  number : '1.2-2'}}% </span>
+                {{(incF > 0)? 'increase':
+                'decrease'}} in last minute.
+              </ng-container>
+              <ng-container #macG *ngIf="machine.name == 'Machine G'; else macH">
+                <span class="{{(incG> 0)? 'text-success':'text-danger'}}"><i
+                    class="{{(incG> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i>
+                  {{incG |
+                  number : '1.2-2'}}% </span>
+                {{(incG > 0)? 'increase':
+                'decrease'}} in last minute.
+              </ng-container>
+              <ng-container #macH *ngIf="machine.name == 'Machine H'; else macI">
+                <span class="{{(incH> 0)? 'text-success':'text-danger'}}"><i
+                    class="{{(incH> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i>
+                  {{incH |
+                  number : '1.2-2'}}% </span>
+                {{(incH > 0)? 'increase':
+                'decrease'}} in last minute.
+              </ng-container>
+              <ng-container #macI *ngIf="machine.name == 'Machine I';">
+                <span class="{{(incI> 0)? 'text-success':'text-danger'}}"><i
+                    class="{{(incI> 0)? 'fa fa-long-arrow-up':'fa fa-long-arrow-down'}}"></i>
+                  {{incI |
+                  number : '1.2-2'}}% </span>
+                {{(incI > 0)? 'increase':
+                'decrease'}} in last minute.
+              </ng-container>
             </p>
           </div>
           <div class="card-footer">
