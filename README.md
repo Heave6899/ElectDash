@@ -27,3 +27,9 @@ The application is set to autodeploy on web, the backend is written in dotnetcor
 - [ ] Add routes for accessing configuration for the web app for the logged in user based on token.
 - [x] Connect to MQTT channel for pub-sub connection
 - [x] Connect to MongoDB using URI and secure credentials
+
+### Branches
+- [Backend MQTT Enabled](https://github.com/Heave6899/ElectDash/tree/backend-feature-mqtt)
+- [Frontend MQTT Enabled](https://github.com/Heave6899/ElectDash/tree/frontend-mqtt)
+- [Backend Master](https://github.com/Heave6899/ElectDash/tree/backend-master)
+- [Backend Master](https://github.com/Heave6899/ElectDash/tree/frontend-master)
