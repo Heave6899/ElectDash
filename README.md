@@ -32,4 +32,4 @@ The application is set to autodeploy on web, the backend is written in dotnetcor
 - [Backend MQTT Enabled](https://github.com/Heave6899/ElectDash/tree/backend-feature-mqtt)
 - [Frontend MQTT Enabled](https://github.com/Heave6899/ElectDash/tree/frontend-mqtt)
 - [Backend Master](https://github.com/Heave6899/ElectDash/tree/backend-master)
-- [Backend Master](https://github.com/Heave6899/ElectDash/tree/frontend-master)
+- [Frontend Master](https://github.com/Heave6899/ElectDash/tree/frontend-master)
